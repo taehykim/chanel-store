@@ -71,7 +71,6 @@ app.get('/api/products/:productId', (req, res, next) => {
 app.get('/api/cart', (req, res, next) => {
   if (!req.session.cartId) {
     res.json([]);
-
   } else {
     const query = `
       select 
@@ -96,6 +95,7 @@ app.post('/api/cart/:productId', (req, res, next) => {
   const productId = Number(req.params.productId);
   if (!Number.isInteger(productId) || productId <= 0) {
     res.status(400).json({ error: 'productId must be a positive integer' });
+    return;
   }
 
   const params = [productId];
@@ -112,31 +112,27 @@ app.post('/api/cart/:productId', (req, res, next) => {
       }
 
       if (!req.session.cartId) {
-        const insertQuery = 'insert into "carts" ("cartId", "createdAt") values(default, default) returning *';
+        const insertQuery =
+          'insert into "carts" ("cartId", "createdAt") values(default, default) returning *';
 
-        return db
-          .query(insertQuery)
-          .then(insertedRes => {
-            return {
-              cartId: insertedRes.rows[0].cartId,
-              price: product.price
-            };
-          })
-          .catch(err => next(err));
+        return db.query(insertQuery).then(insertedRes => {
+          return {
+            cartId: insertedRes.rows[0].cartId,
+            price: product.price
+          };
+        });
       } else {
         return { cartId: req.session.cartId, price: product.price };
       }
     })
     .then(result2 => {
       req.session.cartId = result2.cartId;
-      const addItemQuery = 'insert into "cartItems" ("cartId", "productId", "price") values ($1, $2, $3) returning "cartItemId"';
+      const addItemQuery =
+        'insert into "cartItems" ("cartId", "productId", "price") values ($1, $2, $3) returning "cartItemId"';
       const addItemValues = [req.session.cartId, productId, result2.price];
-      return db
-        .query(addItemQuery, addItemValues)
-        .then(addedToCartRes => {
-          return addedToCartRes.rows[0].cartItemId;
-        })
-        .catch(err => next(err));
+      return db.query(addItemQuery, addItemValues).then(addedToCartRes => {
+        return addedToCartRes.rows[0].cartItemId;
+      });
     })
     .then(result3 => {
       const cartInfoQuery = `
@@ -152,12 +148,9 @@ app.post('/api/cart/:productId', (req, res, next) => {
         where "c"."cartItemId" = $1;
       `;
       const cartInfoValues = [result3];
-      return db
-        .query(cartInfoQuery, cartInfoValues)
-        .then(finalRes => {
-          res.status(201).json(finalRes.rows[0]);
-        })
-        .catch(err => next(err));
+      return db.query(cartInfoQuery, cartInfoValues).then(finalRes => {
+        res.status(201).json(finalRes.rows[0]);
+      });
     })
     .catch(err => {
       next(err);
