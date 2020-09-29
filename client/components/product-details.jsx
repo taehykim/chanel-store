@@ -5,6 +5,7 @@ class ProductDetails extends React.Component {
     super(props);
     this.state = { product: null };
     this.onBackToCatalogClick = this.onBackToCatalogClick.bind(this);
+    this.handleAddBtn = this.handleAddBtn.bind(this);
   }
 
   componentDidMount() {
@@ -18,6 +19,10 @@ class ProductDetails extends React.Component {
 
   onBackToCatalogClick() {
     this.props.setView('catalog', {});
+  }
+
+  handleAddBtn() {
+    this.props.addToCart(this.state.product);
   }
 
   render() {
@@ -40,7 +45,6 @@ class ProductDetails extends React.Component {
                   backgroundPosition: 'center'
                 }}
               ></div>
-              {/* <img src={this.state.product.image} /> */}
               <div className="p-3">
                 <h5 className="card-title">{this.state.product.name}</h5>
                 <p className="card-text">
@@ -49,6 +53,13 @@ class ProductDetails extends React.Component {
                 <p className="card-text">
                   {this.state.product.shortDescription}
                 </p>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={this.handleAddBtn}
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
             <div>
