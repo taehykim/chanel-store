@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
+import CartSummary from './cart-summary';
 
 class App extends React.Component {
   constructor(props) {
@@ -45,21 +46,41 @@ class App extends React.Component {
   }
 
   render() {
-    return this.state.view.name === 'catalog' ? (
-      <div className="container-fluid">
-        <Header cartItemCount={this.state.cart.length} />
-        <ProductList setView={this.setView} />
-      </div>
-    ) : (
-      <div className="container-fluid">
-        <Header cartItemCount={this.state.cart.length} />
-        <ProductDetails
-          productId={this.state.view.params}
-          setView={this.setView}
-          addToCart={this.addToCart}
-        />
-      </div>
-    );
+    if (this.state.view.name === 'catalog') {
+      return (
+        <div className="container-fluid">
+          <Header
+            cartItemCount={this.state.cart.length}
+            setView={this.setView}
+          />
+          <ProductList setView={this.setView} />
+        </div>
+      );
+    } else if (this.state.view.name === 'details') {
+      return (
+        <div className="container-fluid">
+          <Header
+            cartItemCount={this.state.cart.length}
+            setView={this.setView}
+          />
+          <ProductDetails
+            productId={this.state.view.params}
+            setView={this.setView}
+            addToCart={this.addToCart}
+          />
+        </div>
+      );
+    } else if (this.state.view.name === 'cart') {
+      return (
+        <div className="container-fluid">
+          <Header
+            cartItemCount={this.state.cart.length}
+            setView={this.setView}
+          />
+          <CartSummary setView={this.setView} cartItems={this.state.cart} />
+        </div>
+      );
+    }
   }
 }
 

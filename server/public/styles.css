@@ -1,4 +1,5 @@
 .row .card,
-.back {
+.back,
+.cart-btn {
   cursor: pointer;
 }
