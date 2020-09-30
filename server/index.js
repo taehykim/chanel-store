@@ -157,6 +157,34 @@ app.post('/api/cart/:productId', (req, res, next) => {
     });
 });
 
+app.post('/api/orders', (req, res, next) => {
+  if (!req.session.cartId) {
+    res.status(400).json({ error: 'there is no cart for this session' });
+    return;
+  }
+
+  if (!req.body.name || !req.body.creditCard || !req.body.shippingAddress) {
+    res.status(400).json({ error: 'missing one or more of required fields' });
+    return;
+  }
+
+  const insertQuery =
+    'insert into "orders" ("cartId", "name", "creditCard", "shippingAddress") values ($1, $2, $3, $4) returning *';
+  const insertValues = [
+    req.session.cartId,
+    req.body.name,
+    req.body.creditCard,
+    req.body.shippingAddress
+  ];
+
+  db.query(insertQuery, insertValues)
+    .then(result => {
+      delete req.session.cartId;
+      res.status(201).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
