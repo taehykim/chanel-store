@@ -46,7 +46,7 @@ class CheckoutForm extends React.Component {
 
   render() {
     return (
-      <div className="row bg-light vh-100">
+      <div className="row vh-100 body-custom white-font">
         <div
           className="d-flex flex-column p-5 mx-auto"
           style={{ width: '90%' }}

@@ -27,9 +27,12 @@ class ProductDetails extends React.Component {
 
   render() {
     return this.state.product ? (
-      <div className="row d-flex justify-content-center align-items-center py-5 vh-100 body-custom">
+      <div
+        className="row d-flex justify-content-center align-items-start py-5 body-custom"
+        style={{ minHeight: '100vh' }}
+      >
         <div className="card regular-card" style={{ width: '85%' }}>
-          <div className="card-body">
+          <div className="card-body" style={{ height: '100%' }}>
             <div className="back" onClick={this.onBackToCatalogClick}>
               &lt; Back to catalog
             </div>
