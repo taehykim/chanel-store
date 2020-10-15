@@ -29,7 +29,7 @@ class CartSummary extends React.Component {
     return (
       <div className="row body-custom">
         <div
-          className="d-flex flex-column p-5 mx-auto"
+          className="d-flex flex-column p-5 mx-auto cart-mobile"
           style={{ width: '90%' }}
         >
           <div

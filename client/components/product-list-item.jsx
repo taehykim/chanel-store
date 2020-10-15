@@ -16,7 +16,7 @@ class ProductListItem extends React.Component {
         className="card justify-content-center align-items-center m-3 coffee-card"
         style={{
           width: '500px',
-          height: '300px',
+          height: '330px',
           borderRadius: '50px'
         }}
         onClick={this.handleCardClick}
