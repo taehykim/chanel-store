@@ -1,5 +1,15 @@
 * {
-  font-family: "Ramabhadra", sans-serif;
+  font-family: "Delius", cursive;
+}
+
+.logo {
+  font-family: "Playfair Display SC", serif;
+  font-weight: 900;
+  font-size: 2rem;
+}
+
+.white-font {
+  color: white !important;
 }
 
 .row > .card,
@@ -8,10 +18,15 @@
   cursor: pointer;
 }
 
-.coffee-card {
-  border: 4px solid red;
+.body-custom {
+  background-color: #7e685e;
+}
+
+.coffee-card,
+.regular-card {
+  border: 4px solid #c6ab80;
 }
 
 .coffee-card:hover {
-  filter: drop-shadow(0 0 10px red);
+  filter: drop-shadow(0 0 10px #71503a);
 }

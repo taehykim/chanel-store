@@ -39,9 +39,11 @@ class ProductListItem extends React.Component {
             }}
           ></div>
           <div className="card-body">
-            <h5 className="card-title h5">{this.props.product.productName}</h5>
+            <h5 className="card-title h5">
+              <strong>{this.props.product.productName}</strong>
+            </h5>
             <p className="card-text h5">
-              PRICE: ${(this.props.product.price / 100).toFixed(2)}
+              ${(this.props.product.price / 100).toFixed(2)}
             </p>
             <p className="card-text">{this.props.product.shortDescription}</p>
           </div>

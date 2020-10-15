@@ -48,10 +48,11 @@ class Header extends React.Component {
 
   render() {
     return (
-      <nav className="row navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="#">
-          Coffee Farm
-        </a>
+      <nav
+        className="row navbar navbar-expand-lg navbar-light"
+        style={{ backgroundColor: '#dfd7cb' }}
+      >
+        <a className="navbar-brand logo">Coffee Farm</a>
         <button
           className="navbar-toggler"
           type="button"
@@ -83,7 +84,11 @@ class Header extends React.Component {
               >
                 Shop by Stores
               </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div
+                className="dropdown-menu"
+                aria-labelledby="navbarDropdown"
+                style={{ cursor: 'pointer' }}
+              >
                 <a className="dropdown-item" onClick={this.onAllClick}>
                   View All
                 </a>
@@ -102,7 +107,7 @@ class Header extends React.Component {
           </ul>
 
           <span className="cart-btn" onClick={this.handleCartClick}>
-            <span>{this.props.cartItemCount} items </span>
+            <span>{this.props.cartItemCount} items</span>
             <i className="fas fa-shopping-cart"></i>
           </span>
         </div>

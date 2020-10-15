@@ -39,16 +39,18 @@ class ProductList extends React.Component {
 
   render() {
     return (
-      <div className="row justify-content-center py-4">
-        {this.state.products.map(product => (
-          <ProductListItem
-            key={product.productId}
-            product={product}
-            setView={this.props.setView}
-            store={this.props.store}
-          />
-        ))}
-      </div>
+      <>
+        <div className="row justify-content-center py-4 body-custom">
+          {this.state.products.map(product => (
+            <ProductListItem
+              key={product.productId}
+              product={product}
+              setView={this.props.setView}
+              store={this.props.store}
+            />
+          ))}
+        </div>
+      </>
     );
   }
 }
