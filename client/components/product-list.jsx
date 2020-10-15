@@ -9,29 +9,48 @@ class ProductList extends React.Component {
   }
 
   componentDidMount() {
-    this.getProducts();
+    const storeId = this.props.storeId ? this.props.storeId : null;
+    this.getProducts(storeId);
   }
 
-  getProducts() {
-    fetch('/api/products')
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ products: data });
-      })
-      .catch(err => console.error('Error:', err));
+  getProducts(storeId) {
+    if (storeId) {
+      fetch(`/api/store/products/${storeId}`)
+        .then(res => res.json())
+        .then(data => {
+          this.setState({ products: data });
+        })
+        .catch(err => console.error(err));
+    } else {
+      fetch('/api/products')
+        .then(res => res.json())
+        .then(data => {
+          this.setState({ products: data });
+        })
+        .catch(err => console.error('Error:', err));
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.storeId !== prevProps.storeId) {
+      this.getProducts(this.props.storeId);
+    }
   }
 
   render() {
     return (
-      <div className="row justify-content-center bg-light py-4">
-        {this.state.products.map(product => (
-          <ProductListItem
-            key={product.productId}
-            product={product}
-            setView={this.props.setView}
-          />
-        ))}
-      </div>
+      <>
+        <div className="row justify-content-center py-4 body-custom">
+          {this.state.products.map(product => (
+            <ProductListItem
+              key={product.productId}
+              product={product}
+              setView={this.props.setView}
+              store={this.props.store}
+            />
+          ))}
+        </div>
+      </>
     );
   }
 }

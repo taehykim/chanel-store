@@ -27,21 +27,24 @@ class CartSummary extends React.Component {
 
   render() {
     return (
-      <div className="row bg-light vh-100">
+      <div className="row body-custom">
         <div
           className="d-flex flex-column p-5 mx-auto"
           style={{ width: '90%' }}
         >
-          <div className="back my-3" onClick={this.onBackToCatalogClick}>
+          <div
+            className="back my-3 white-font"
+            onClick={this.onBackToCatalogClick}
+          >
             &lt; Back to catalog
           </div>
-          <div className="h1">My Cart</div>
+          <div className="h1 white-font">My Cart</div>
           <div>
             {this.props.cartItems.map(item => (
               <CardSummaryItem item={item} key={item.cartItemId} />
             ))}
           </div>
-          <div className="d-flex justify-content-between align-items-center">
+          <div className="d-flex justify-content-between align-items-center white-font">
             <div className="h3">Item Total: ${this.getTotalPrice()}</div>
             {this.props.cartItems.length !== 0 ? (
               <div>

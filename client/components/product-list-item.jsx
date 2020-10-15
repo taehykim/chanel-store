@@ -13,23 +13,36 @@ class ProductListItem extends React.Component {
   render() {
     return (
       <div
-        className="card justify-content-center align-items-center m-3"
-        style={{ width: '28%', height: '500px' }}
+        className="card justify-content-center align-items-center m-3 coffee-card"
+        style={{
+          width: '500px',
+          height: '300px',
+          borderRadius: '50px'
+        }}
         onClick={this.handleCardClick}
       >
-        <div style={{ width: '100%', height: '100%' }}>
+        <div
+          className="d-flex p-3"
+          style={{
+            width: '100%',
+            height: '100%'
+          }}
+        >
           <div
             style={{
-              height: '60%',
+              height: '100%',
               backgroundImage: `url(${this.props.product.image})`,
               backgroundSize: 'contain',
               backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center'
+              backgroundPosition: 'center',
+              flexBasis: '100%'
             }}
           ></div>
           <div className="card-body">
-            <h5 className="card-title">{this.props.product.name}</h5>
-            <p className="card-text">
+            <h5 className="card-title h5">
+              <strong>{this.props.product.productName}</strong>
+            </h5>
+            <p className="card-text h5">
               ${(this.props.product.price / 100).toFixed(2)}
             </p>
             <p className="card-text">{this.props.product.shortDescription}</p>

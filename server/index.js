@@ -19,11 +19,62 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/stores', (req, res, next) => {
+  const query = `
+  select
+    *
+  from "stores"
+  `;
+
+  db.query(query)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.get('/api/store/products/:storeId', (req, res, next) => {
+  const query = `
+    select
+    "s"."name" as "storeName",
+    "p"."productId",
+    "p"."name" as "productName",
+    "p"."price",
+    "p"."image",
+    "p"."shortDescription",
+    "p"."longDescription"
+    from "products" as "p"
+    join "stores" as "s" using ("storeId")
+    where "s"."storeId" = $1;
+  `;
+
+  const storeId = Number(req.params.storeId);
+
+  if (!Number.isInteger(storeId) || storeId <= 0) {
+    res.status(400).json({ error: 'storeId must be a positive integer' });
+    return;
+  }
+
+  const params = [Number(req.params.storeId)];
+
+  db.query(query, params)
+    .then(result => {
+      const products = result.rows;
+
+      if (!products) {
+        res
+          .status(404)
+          .json({ error: `cannot find product with productId ${storeId}` });
+      } else {
+        res.status(200).json(products);
+      }
+    })
+    .catch(err => next(err));
+});
+
 app.get('/api/products', (req, res, next) => {
   const query = `
   select 
     "productId",
-    "name",
+    "name" as "productName",
     "price",
     "image",
     "shortDescription"
@@ -38,7 +89,7 @@ app.get('/api/products/:productId', (req, res, next) => {
   const query = `
     select
       "productId",
-      "name",
+      "name" as "productName",
       "price",
       "image",
       "shortDescription",

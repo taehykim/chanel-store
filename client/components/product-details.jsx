@@ -18,7 +18,7 @@ class ProductDetails extends React.Component {
   }
 
   onBackToCatalogClick() {
-    this.props.setView('catalog', {});
+    this.props.setView(this.props.prevView.name, this.props.prevView.params);
   }
 
   handleAddBtn() {
@@ -27,8 +27,8 @@ class ProductDetails extends React.Component {
 
   render() {
     return this.state.product ? (
-      <div className="d-flex justify-content-center align-items-center py-5">
-        <div className="card" style={{ width: '85%' }}>
+      <div className="row d-flex justify-content-center align-items-center py-5 vh-100 body-custom">
+        <div className="card regular-card" style={{ width: '85%' }}>
           <div className="card-body">
             <div className="back" onClick={this.onBackToCatalogClick}>
               &lt; Back to catalog
@@ -48,7 +48,7 @@ class ProductDetails extends React.Component {
               <div className="p-3">
                 <h5 className="card-title">{this.state.product.name}</h5>
                 <p className="card-text">
-                  ${(this.state.product.price / 100).toFixed(2)}
+                  Price: ${(this.state.product.price / 100).toFixed(2)}
                 </p>
                 <p className="card-text">
                   {this.state.product.shortDescription}

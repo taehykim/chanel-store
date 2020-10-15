@@ -3,7 +3,7 @@ import React from 'react';
 class CardSummaryItem extends React.Component {
   render() {
     return (
-      <div className="card my-3 mx-auto d-flex flex-row p-3">
+      <div className="card my-3 mx-auto d-flex flex-row p-3 regular-card">
         <div
           style={{
             height: '300px',
