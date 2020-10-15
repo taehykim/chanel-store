@@ -18,7 +18,7 @@ class ProductDetails extends React.Component {
   }
 
   onBackToCatalogClick() {
-    this.props.setView('catalog', {});
+    this.props.setView(this.props.prevView.name, this.props.prevView.params);
   }
 
   handleAddBtn() {

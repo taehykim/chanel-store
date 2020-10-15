@@ -1,5 +1,17 @@
+* {
+  font-family: "Ramabhadra", sans-serif;
+}
+
 .row > .card,
 .back,
 .cart-btn {
   cursor: pointer;
+}
+
+.coffee-card {
+  border: 4px solid red;
+}
+
+.coffee-card:hover {
+  filter: drop-shadow(0 0 10px red);
 }

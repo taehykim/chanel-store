@@ -4,18 +4,29 @@ import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
+import DisclaimerModal from './disclaimer-modal';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { view: { name: 'catalog', params: {} }, cart: [] };
+    this.state = {
+      view: { name: 'catalog', params: {} },
+      cart: [],
+      disclaimerAgreed: false,
+      previousView: {}
+    };
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
+    this.onAgreeClick = this.onAgreeClick.bind(this);
   }
 
-  setView(name, params) {
+  onAgreeClick() {
+    this.setState({ disclaimerAgreed: true });
+  }
+
+  setView(name, params, prevName, prevParams) {
     this.setState({ view: { name: name, params: params } });
   }
 
@@ -58,15 +69,45 @@ class App extends React.Component {
     this.getCartItems();
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (
+      this.state.view.params !== prevState.view.params &&
+      prevState.view.name !== 'details'
+    ) {
+      this.setState({ previousView: prevState.view });
+    }
+  }
+
   render() {
-    if (this.state.view.name === 'catalog') {
+    if (this.state.view.name === 'store') {
       return (
         <div className="container-fluid">
           <Header
             cartItemCount={this.state.cart.length}
             setView={this.setView}
           />
-          <ProductList setView={this.setView} />
+          <ProductList
+            setView={this.setView}
+            storeId={this.state.view.params}
+          />
+        </div>
+      );
+    } else if (this.state.view.name === 'catalog') {
+      return (
+        <div className="container-fluid">
+          <Header
+            cartItemCount={this.state.cart.length}
+            setView={this.setView}
+          />
+          <ProductList
+            setView={this.setView}
+            store={this.state.view.params}
+            prevView={this.state.previousView}
+          />
+          <DisclaimerModal
+            onAgreeClick={this.onAgreeClick}
+            agreeStatus={this.state.disclaimerAgreed}
+          />
         </div>
       );
     } else if (this.state.view.name === 'details') {
@@ -80,6 +121,7 @@ class App extends React.Component {
             productId={this.state.view.params}
             setView={this.setView}
             addToCart={this.addToCart}
+            prevView={this.state.previousView}
           />
         </div>
       );
