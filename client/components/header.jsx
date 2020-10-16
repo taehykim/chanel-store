@@ -3,15 +3,17 @@ import React from 'react';
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { stores: [] };
+    this.state = { stores: [], show: true };
     this.getAllStores = this.getAllStores.bind(this);
     this.getStoreId = this.getStoreId.bind(this);
     this.handleCartClick = this.handleCartClick.bind(this);
     this.onCoffeeStoreClick = this.onCoffeeStoreClick.bind(this);
     this.onAllClick = this.onAllClick.bind(this);
+    this.onStoreClick = this.onStoreClick.bind(this);
   }
 
   handleCartClick() {
+    this.setState({ show: false });
     this.props.setView('cart', {});
   }
 
@@ -25,12 +27,18 @@ class Header extends React.Component {
   }
 
   onCoffeeStoreClick(event) {
+    this.setState({ show: false });
     const storeId = this.getStoreId(event.target.text);
     this.props.setView('store', storeId);
   }
 
   onAllClick() {
+    this.setState({ show: false });
     this.props.setView('catalog', {});
+  }
+
+  onStoreClick() {
+    this.setState({ show: false });
   }
 
   getAllStores() {
@@ -46,7 +54,18 @@ class Header extends React.Component {
     this.getAllStores();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.show !== this.state.show) {
+      this.setState({ show: true });
+    }
+  }
+
   render() {
+    let navbarClassName = 'collapse navbar-collapse';
+    if (!this.state.show) {
+      navbarClassName = 'collapse navbar-collapse d-none';
+    }
+
     return (
       <nav
         className="row navbar navbar-expand-lg navbar-light"
@@ -65,7 +84,7 @@ class Header extends React.Component {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div className={navbarClassName} id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <a className="nav-link" href="#" onClick={this.onAllClick}>
