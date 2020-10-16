@@ -49,7 +49,7 @@ class ProductDetails extends React.Component {
                 }}
               ></div>
               <div className="p-3">
-                <h5 className="card-title">{this.state.product.name}</h5>
+                <h5 className="card-title">{this.state.product.productName}</h5>
                 <p className="card-text">
                   Price: ${(this.state.product.price / 100).toFixed(2)}
                 </p>
