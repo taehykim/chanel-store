@@ -46,7 +46,10 @@ class CheckoutForm extends React.Component {
 
   render() {
     return (
-      <div className="row vh-100 body-custom white-font">
+      <div
+        className="row body-custom white-font"
+        style={{ minHeight: '100vh' }}
+      >
         <div
           className="d-flex flex-column p-5 mx-auto"
           style={{ width: '90%' }}
@@ -61,6 +64,7 @@ class CheckoutForm extends React.Component {
                 className="form-control"
                 value={this.state.name}
                 onChange={this.handleNameChange}
+                required
               />
             </div>
             <div className="form-group">
@@ -70,6 +74,7 @@ class CheckoutForm extends React.Component {
                 className="form-control"
                 value={this.state.creditCard}
                 onChange={this.handleCreditCardChange}
+                required
               />
             </div>
             <div className="form-group">
@@ -79,6 +84,7 @@ class CheckoutForm extends React.Component {
                 rows="4"
                 value={this.state.shippingAddress}
                 onChange={this.handleShippingAddressChange}
+                required
               ></textarea>
             </div>
             <div className="d-flex justify-content-between">
