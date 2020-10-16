@@ -36,7 +36,7 @@ class ProductDetails extends React.Component {
             <div className="back" onClick={this.onBackToCatalogClick}>
               &lt; Back to catalog
             </div>
-            <div className="d-flex">
+            <div className="d-flex mobile-detail-card">
               <div
                 className="m-3"
                 style={{
