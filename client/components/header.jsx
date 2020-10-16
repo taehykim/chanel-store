@@ -88,7 +88,7 @@ class Header extends React.Component {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <a className="nav-link" href="#" onClick={this.onAllClick}>
-                Home <span className="sr-only">(current)</span>
+                HOME <span className="sr-only">(current)</span>
               </a>
             </li>
             <li className="nav-item dropdown">
@@ -101,7 +101,7 @@ class Header extends React.Component {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                Shop by Stores
+                SHOP BY STORES
               </a>
               <div
                 className="dropdown-menu"
@@ -109,7 +109,7 @@ class Header extends React.Component {
                 style={{ cursor: 'pointer' }}
               >
                 <a className="dropdown-item" onClick={this.onAllClick}>
-                  View All
+                  <b>View All</b>
                 </a>
                 {this.state.stores.map(store => (
                   <a
@@ -125,9 +125,9 @@ class Header extends React.Component {
             </li>
           </ul>
 
-          <span className="cart-btn" onClick={this.handleCartClick}>
-            <span>{this.props.cartItemCount} items</span>
-            <i className="fas fa-shopping-cart"></i>
+          <span className="cart-btn mr-4" onClick={this.handleCartClick}>
+            <span>{this.props.cartItemCount} ITEMS </span>
+            <i className="fas fa-shopping-bag fa-lg"></i>
           </span>
         </div>
       </nav>
