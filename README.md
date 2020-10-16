@@ -28,3 +28,6 @@ Try the application at [https://coffeefarm.taehykim.com/]
 - User can place an order
 
 ## Preview
+
+
+![COFFEE FARM APP DEMO](assets/coffee-farm-demo-v1.gif)
