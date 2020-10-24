@@ -33,35 +33,34 @@ class CartSummary extends React.Component {
           style={{ width: '90%' }}
         >
           <div
-            className="back my-3 white-font"
+            className="back my-3"
             onClick={this.onBackToCatalogClick}
           >
             &lt; Back to catalog
           </div>
-          <div className="h1 white-font">My Cart</div>
+          <div className="h1 text-center text-uppercase">Shopping Bag</div>
           <div>
             {this.props.cartItems.map(item => (
               <CardSummaryItem item={item} key={item.cartItemId} />
             ))}
           </div>
-          <div className="d-flex justify-content-between align-items-center white-font">
-            <div className="h3">Item Total: ${this.getTotalPrice()}</div>
-            {this.props.cartItems.length !== 0 ? (
+          {this.props.cartItems.length !== 0 ? (
+            <div className="d-flex justify-content-between align-items-center checkout-total p-5">
+              <div className="h3 text-uppercase">Total: ${this.getTotalPrice()}</div>
               <div>
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-dark text-uppercase py-3 px-5"
                   onClick={this.onCheckoutClick}
                 >
-                  Check Out
+                  Continue to Checkout
                 </button>
               </div>
-            ) : (
-              <div></div>
-            )}
-          </div>
+            </div>
+          ) : <div className="h5 text-center font-weight-light">Your bag is empty</div>}
         </div>
       </div>
+
     );
   }
 }

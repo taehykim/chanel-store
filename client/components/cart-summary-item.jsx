@@ -3,7 +3,7 @@ import React from 'react';
 class CardSummaryItem extends React.Component {
   render() {
     return (
-      <div className="card my-3 mx-auto d-flex justify-content-center flex-row p-3 regular-card checkout-card">
+      <div className="card w-80 cart-summary-card border-0 my-3 mx-auto d-flex justify-content-center flex-row p-3 regular-card checkout-card">
         <div
           className="checkout-img"
           style={{
@@ -17,9 +17,9 @@ class CardSummaryItem extends React.Component {
         ></div>
         <div className="card-body d-flex justify-content-start align-items-center">
           <div>
-            <h5 className="card-title">{this.props.item.name}</h5>
-            <p className="card-text">${this.props.item.price / 100}</p>
+            <h5 className="card-title text-uppercase">{this.props.item.name}</h5>
             <p className="card-text">{this.props.item.shortDescription}</p>
+            <p className="card-text">${this.props.item.price / 100}</p>
           </div>
         </div>
       </div>

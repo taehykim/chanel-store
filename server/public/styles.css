@@ -1,9 +1,8 @@
 * {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .logo {
-  /* font-family: "Playfair Display SC", serif; */
   font-weight: 900;
   font-size: 2rem;
 }
@@ -12,24 +11,32 @@
   color: white !important;
 }
 
+
 .row > .card,
 .back,
 .cart-btn {
   cursor: pointer;
 }
 
-.body-custom {
-  background-color: #7e685e;
+.product-img{
+  transition: border-bottom 0.3s ease;
+  border-bottom: transparent;
 }
 
-.coffee-card,
-.regular-card {
-  border: 4px solid #c6ab80;
+.product-img:hover {
+  border-bottom: 4px solid black;
 }
 
-.coffee-card:hover {
-  filter: drop-shadow(0 0 10px #71503a);
+.cart-summary-card:nth-child(2n+1) {
+  border-radius: 0;
+  border-bottom: 1px solid black !important;
 }
+
+.checkout-total {
+  background-color: #f6f6f6;
+}
+
+
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   .checkout-card {

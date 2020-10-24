@@ -9,13 +9,13 @@ class ProductList extends React.Component {
   }
 
   componentDidMount() {
-    const storeId = this.props.storeId ? this.props.storeId : null;
-    this.getProducts(storeId);
+    const categoryId = this.props.categoryInfo ? this.props.categoryInfo.categoryId : null;
+    this.getProducts(categoryId);
   }
 
-  getProducts(storeId) {
-    if (storeId) {
-      fetch(`/api/store/products/${storeId}`)
+  getProducts(categoryId) {
+    if (categoryId) {
+      fetch(`/api/category/products/${categoryId}`)
         .then(res => res.json())
         .then(data => {
           this.setState({ products: data });
@@ -32,14 +32,22 @@ class ProductList extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.storeId !== prevProps.storeId) {
-      this.getProducts(this.props.storeId);
+    if (this.props.categoryInfo !== prevProps.categoryInfo) {
+      this.getProducts(this.props.categoryInfo.categoryId);
     }
   }
 
   render() {
+    let categoryTitleClass = 'h1 text-uppercase text-center';
+    let categoryTitle;
+    if (!this.props.categoryInfo) {
+      categoryTitleClass += ' d-none';
+    } else {
+      categoryTitle = this.props.categoryInfo.name;
+    }
     return (
       <>
+        <div className={categoryTitleClass}>{categoryTitle}</div>
         <div className="row justify-content-center py-4 body-custom">
           {this.state.products.map(product => (
             <ProductListItem

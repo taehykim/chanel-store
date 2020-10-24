@@ -19,11 +19,11 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/stores', (req, res, next) => {
+app.get('/api/categories', (req, res, next) => {
   const query = `
   select
     *
-  from "stores"
+  from "categories"
   `;
 
   db.query(query)
@@ -31,10 +31,10 @@ app.get('/api/stores', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/store/products/:storeId', (req, res, next) => {
+app.get('/api/category/products/:categoryId', (req, res, next) => {
   const query = `
     select
-    "s"."name" as "storeName",
+    "c"."name" as "categoryName",
     "p"."productId",
     "p"."name" as "productName",
     "p"."price",
@@ -42,18 +42,18 @@ app.get('/api/store/products/:storeId', (req, res, next) => {
     "p"."shortDescription",
     "p"."longDescription"
     from "products" as "p"
-    join "stores" as "s" using ("storeId")
-    where "s"."storeId" = $1;
+    join "categories" as "c" using ("categoryId")
+    where "c"."categoryId" = $1;
   `;
 
-  const storeId = Number(req.params.storeId);
+  const storeId = Number(req.params.categoryId);
 
   if (!Number.isInteger(storeId) || storeId <= 0) {
     res.status(400).json({ error: 'storeId must be a positive integer' });
     return;
   }
 
-  const params = [Number(req.params.storeId)];
+  const params = [Number(req.params.categoryId)];
 
   db.query(query, params)
     .then(result => {

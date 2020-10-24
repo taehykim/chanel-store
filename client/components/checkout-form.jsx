@@ -47,15 +47,15 @@ class CheckoutForm extends React.Component {
   render() {
     return (
       <div
-        className="row body-custom white-font"
+        className="row body-custom"
         style={{ minHeight: '100vh' }}
       >
         <div
           className="d-flex flex-column p-5 mx-auto"
           style={{ width: '90%' }}
         >
-          <div className="h1">My Cart</div>
-          <div className="h4">Order Total: ${this.getTotalPrice()}</div>
+          <div className="h1 text-uppercase text-center">Checkout</div>
+          <div className="h4 text-uppercase"> Total: ${this.getTotalPrice()}</div>
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label>Name</label>
@@ -97,7 +97,7 @@ class CheckoutForm extends React.Component {
             </div>
           </form>
         </div>
-      </div>
+      </div >
     );
   }
 }

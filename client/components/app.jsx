@@ -79,7 +79,7 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.view.name === 'store') {
+    if (this.state.view.name === 'category') {
       return (
         <div className="container-fluid">
           <Header
@@ -88,7 +88,7 @@ class App extends React.Component {
           />
           <ProductList
             setView={this.setView}
-            storeId={this.state.view.params}
+            categoryInfo={this.state.view.params}
           />
         </div>
       );
