@@ -14,7 +14,7 @@ class ProductListItem extends React.Component {
     return (
       <div className="card-group m-auto" style={{ flexBasis: '30%' }} onClick={this.handleCardClick}>
         <div className="card border-0">
-          <img src={this.props.product.image} className="card-img-top product-img" alt="..." />
+          <img src={this.props.product.image} className="card-img-top product-img" />
           <div className="card-body text-center">
             <h5 className="card-title text-uppercase">{this.props.product.productName}</h5>
             <p className="card-text">${(this.props.product.price / 100)}</p>

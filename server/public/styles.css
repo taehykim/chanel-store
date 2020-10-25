@@ -19,7 +19,7 @@
 
 div.product-list-div img.product-img{
   transition: border-bottom 0.3s ease;
-  border-bottom: transparent;
+  border-bottom: 4px solid transparent;
 }
 
 div.product-list-div img.product-img:hover {

@@ -33,7 +33,11 @@ class ProductList extends React.Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.categoryInfo !== prevProps.categoryInfo) {
-      this.getProducts(this.props.categoryInfo.categoryId);
+      if (this.props.categoryInfo) {
+        this.getProducts(this.props.categoryInfo.categoryId);
+      } else {
+        this.getProducts(null);
+      }
     }
   }
 
