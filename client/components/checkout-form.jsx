@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductListItem from './product-list-item';
 
 class CheckoutForm extends React.Component {
   constructor(props) {
@@ -55,47 +56,65 @@ class CheckoutForm extends React.Component {
           style={{ width: '90%' }}
         >
           <div className="h1 text-uppercase text-center">Checkout</div>
-          <div className="h4 text-uppercase"> Total: ${this.getTotalPrice()}</div>
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <label>Name</label>
-              <input
-                type="text"
-                className="form-control"
-                value={this.state.name}
-                onChange={this.handleNameChange}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>Credit Card</label>
-              <input
-                type="text"
-                className="form-control"
-                value={this.state.creditCard}
-                onChange={this.handleCreditCardChange}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label>Shipping Address</label>
-              <textarea
-                className="form-control"
-                rows="4"
-                value={this.state.shippingAddress}
-                onChange={this.handleShippingAddressChange}
-                required
-              ></textarea>
-            </div>
-            <div className="d-flex justify-content-between">
-              <div className="back" onClick={this.onBackClick}>
-                &lt; Continue Shopping
+          <div className="row d-flex justify-content-around align-items-center">
+            <div className="checkout-div">
+              <div className="h4 text-uppercase text-center checkout-title-border py-3">Order Summary</div>
+              <div className="row">
+                {this.props.orderItems.map(item => <ProductListItem
+                  key={item.cartItemId}
+                  product={item}
+                />)}
               </div>
-              <button type="submit" className="btn btn-primary">
-                Place Order
-              </button>
+              <hr />
+              <div className="h4 text-uppercase text-right"> Total: ${this.getTotalPrice()}</div>
             </div>
-          </form>
+            <div className="checkout-div">
+              <div className="h4 text-uppercase text-center checkout-title-border py-3">Billing Information</div>
+              <form onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                  {/* <label>Name</label> */}
+                  <input
+                    type="text"
+                    className="form-control border-top-0 border-right-0 border-left-0"
+                    value={this.state.name}
+                    onChange={this.handleNameChange}
+                    placeholder="Name"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  {/* <label>Credit Card</label> */}
+                  <input
+                    type="text"
+                    className="form-control border-top-0 border-right-0 border-left-0"
+                    value={this.state.creditCard}
+                    onChange={this.handleCreditCardChange}
+                    placeholder="Credit Card"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  {/* <label>Shipping Address</label> */}
+                  <textarea
+                    className="form-control border-top-0 border-right-0 border-left-0"
+                    rows="4"
+                    value={this.state.shippingAddress}
+                    onChange={this.handleShippingAddressChange}
+                    placeholder="Shipping Address"
+                    required
+                  ></textarea>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <div className="back" onClick={this.onBackClick}>
+                    &lt; Continue Shopping
+                  </div>
+                  <button type="submit" className="btn btn-primary">
+                    Place Order
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div >
     );

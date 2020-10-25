@@ -27,13 +27,25 @@
   border-bottom: 4px solid black;
 }
 
-.cart-summary-card:nth-child(2n+1) {
+.cart-summary-card:nth-child(n) {
   border-radius: 0;
   border-bottom: 1px solid black !important;
 }
 
+.cart-summary-card:last-child {
+  border-bottom: 1px solid transparent !important;
+}
+
 .checkout-total {
   background-color: #f6f6f6;
+}
+
+.checkout-title-border{
+  border-bottom: 4px solid black;
+}
+
+.checkout-div {
+  width: 80%;
 }
 
 
