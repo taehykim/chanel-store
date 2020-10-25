@@ -48,7 +48,7 @@ class ProductList extends React.Component {
     return (
       <>
         <div className={categoryTitleClass}>{categoryTitle}</div>
-        <div className="row justify-content-center py-4 body-custom">
+        <div className="row justify-content-center py-4 body-custom product-list-div">
           {this.state.products.map(product => (
             <ProductListItem
               key={product.productId}

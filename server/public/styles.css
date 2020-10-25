@@ -11,19 +11,18 @@
   color: white !important;
 }
 
-
 .row > .card,
 .back,
 .cart-btn {
   cursor: pointer;
 }
 
-.product-img{
+div.product-list-div img.product-img{
   transition: border-bottom 0.3s ease;
   border-bottom: transparent;
 }
 
-.product-img:hover {
+div.product-list-div img.product-img:hover {
   border-bottom: 4px solid black;
 }
 
@@ -48,6 +47,25 @@
   width: 80%;
 }
 
+.bold-border {
+  border: 2px solid black;
+}
+
+.custom-btn > p,
+.place-order-btn > p {
+  width: 35%;
+  border-bottom: 2px solid transparent;
+}
+
+.place-order-btn > p:hover{
+  width: 35%;
+  border-bottom: 2px solid white;
+}
+
+.custom-btn > p:hover{
+  width: 35%;
+  border-bottom: 2px solid black;
+}
 
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {

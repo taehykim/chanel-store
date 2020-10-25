@@ -78,7 +78,7 @@ class CheckoutForm extends React.Component {
                     className="form-control border-top-0 border-right-0 border-left-0"
                     value={this.state.name}
                     onChange={this.handleNameChange}
-                    placeholder="Name"
+                    placeholder="Name on card"
                     required
                   />
                 </div>
@@ -89,7 +89,7 @@ class CheckoutForm extends React.Component {
                     className="form-control border-top-0 border-right-0 border-left-0"
                     value={this.state.creditCard}
                     onChange={this.handleCreditCardChange}
-                    placeholder="Credit Card"
+                    placeholder="Card number"
                     required
                   />
                 </div>
@@ -104,13 +104,13 @@ class CheckoutForm extends React.Component {
                     required
                   ></textarea>
                 </div>
-                <div className="d-flex justify-content-between">
-                  <div className="back" onClick={this.onBackClick}>
-                    &lt; Continue Shopping
-                  </div>
-                  <button type="submit" className="btn btn-primary">
-                    Place Order
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                  <button type="submit" className="btn btn-dark text-uppercase p-3 checkout-div place-order-btn d-flex justify-content-center">
+                    <p className="m-0">Place Order</p>
                   </button>
+                  <div className="back my-3 checkout-div text-center p-3 bold-border text-uppercase custom-btn d-flex justify-content-center" onClick={this.onBackClick}>
+                    <p className="m-0">Continue Shopping</p>
+                  </div>
                 </div>
               </form>
             </div>
