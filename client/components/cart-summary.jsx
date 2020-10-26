@@ -22,7 +22,7 @@ class CartSummary extends React.Component {
     for (let i = 0; i < this.props.cartItems.length; i++) {
       total += this.props.cartItems[i].price;
     }
-    return total / 100;
+    return total;
   }
 
   render() {
@@ -41,12 +41,12 @@ class CartSummary extends React.Component {
           <div className="h1 text-center text-uppercase">Shopping Bag</div>
           <div>
             {this.props.cartItems.map(item => (
-              <CardSummaryItem item={item} key={item.cartItemId} />
+              <CardSummaryItem item={item} key={item.cartItemId} formatPrice={this.props.formatPrice} />
             ))}
           </div>
           {this.props.cartItems.length !== 0 ? (
             <div className="d-flex justify-content-between align-items-center checkout-total p-5">
-              <div className="h3 text-uppercase">Total: ${this.getTotalPrice()}</div>
+              <div className="h3 text-uppercase">Total: ${this.props.formatPrice(this.getTotalPrice() / 100)}</div>
               <div>
                 <button
                   type="button"

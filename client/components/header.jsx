@@ -73,7 +73,7 @@ class Header extends React.Component {
           <h1 className="text-uppercase">chanel</h1>
         </div>
         <nav
-          className="row navbar navbar-expand-lg navbar-light"
+          className="row navbar navbar-expand-lg navbar-light border-bottom width-95 m-auto"
         >
           <button
             className="navbar-toggler"

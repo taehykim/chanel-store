@@ -19,7 +19,7 @@ class CardSummaryItem extends React.Component {
           <div>
             <h5 className="card-title text-uppercase">{this.props.item.name}</h5>
             <p className="card-text">{this.props.item.shortDescription}</p>
-            <p className="card-text">${this.props.item.price / 100}</p>
+            <p className="card-text">${this.props.formatPrice(this.props.item.price / 100)}</p>
           </div>
         </div>
       </div>

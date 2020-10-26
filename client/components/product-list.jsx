@@ -42,16 +42,23 @@ class ProductList extends React.Component {
   }
 
   render() {
+    let categoryTitleRowClass = 'row flex-column py-4 width-95 m-auto';
     let categoryTitleClass = 'h1 text-uppercase text-center';
+    let resultsStatsClass = 'h5 text-right mr-5';
     let categoryTitle;
     if (!this.props.categoryInfo) {
       categoryTitleClass += ' d-none';
+      resultsStatsClass += ' d-none';
     } else {
       categoryTitle = this.props.categoryInfo.name;
+      categoryTitleRowClass += ' border-bottom';
     }
     return (
       <>
-        <div className={categoryTitleClass}>{categoryTitle}</div>
+        <div className={categoryTitleRowClass}>
+          <span className={categoryTitleClass}>{categoryTitle}</span>
+          <span className={resultsStatsClass}>{this.state.products.length} results</span>
+        </div>
         <div className="row justify-content-center py-4 body-custom product-list-div">
           {this.state.products.map(product => (
             <ProductListItem
@@ -59,6 +66,7 @@ class ProductList extends React.Component {
               product={product}
               setView={this.props.setView}
               store={this.props.store}
+              formatPrice={this.props.formatPrice}
             />
           ))}
         </div>

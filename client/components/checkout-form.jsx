@@ -20,7 +20,7 @@ class CheckoutForm extends React.Component {
     for (let i = 0; i < this.props.orderItems.length; i++) {
       total += this.props.orderItems[i].price;
     }
-    return total / 100;
+    return total;
   }
 
   onBackClick() {
@@ -63,10 +63,11 @@ class CheckoutForm extends React.Component {
                 {this.props.orderItems.map(item => <ProductListItem
                   key={item.cartItemId}
                   product={item}
+                  formatPrice={this.props.formatPrice}
                 />)}
               </div>
               <hr />
-              <div className="h4 text-uppercase text-right"> Total: ${this.getTotalPrice()}</div>
+              <div className="h4 text-uppercase text-right"> Total: ${this.props.formatPrice(this.getTotalPrice() / 100)}</div>
             </div>
             <div className="checkout-div">
               <div className="h4 text-uppercase text-center checkout-title-border py-3">Billing Information</div>

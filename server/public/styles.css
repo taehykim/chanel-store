@@ -52,12 +52,14 @@ div.product-list-div img.product-img:hover {
 }
 
 .custom-btn > p,
-.place-order-btn > p {
+.place-order-btn > p,
+.add-to-cart > p {
   width: 35%;
   border-bottom: 2px solid transparent;
 }
 
-.place-order-btn > p:hover{
+.place-order-btn > p:hover, 
+.add-to-cart > p:hover {
   width: 35%;
   border-bottom: 2px solid white;
 }
@@ -67,6 +69,27 @@ div.product-list-div img.product-img:hover {
   border-bottom: 2px solid black;
 }
 
+.product-detail-title {
+  font-size: 1.56rem;
+  line-height: 1.24;
+  font-weight: 600;
+  border-bottom: 3px solid black;
+  letter-spacing: 0.1rem;
+}
+
+.feature{
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.width-95 {
+  width: 95%;
+}
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   .checkout-card {

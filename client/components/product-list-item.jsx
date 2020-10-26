@@ -4,6 +4,7 @@ class ProductListItem extends React.Component {
   constructor(props) {
     super(props);
     this.handleCardClick = this.handleCardClick.bind(this);
+
   }
 
   handleCardClick() {
@@ -17,7 +18,7 @@ class ProductListItem extends React.Component {
           <img src={this.props.product.image} className="card-img-top product-img" />
           <div className="card-body text-center">
             <h5 className="card-title text-uppercase">{this.props.product.productName}</h5>
-            <p className="card-text">${(this.props.product.price / 100)}</p>
+            <p className="card-text">${this.props.formatPrice(this.props.product.price / 100)}</p>
             <p className="card-text text-uppercase">{this.props.product.shortDescription}</p>
           </div>
         </div>
