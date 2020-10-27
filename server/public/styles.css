@@ -51,6 +51,11 @@ div.product-list-div img.product-img:hover {
   border: 2px solid black;
 }
 
+.remove-btn{
+  border-bottom: 2px solid;
+  cursor: pointer;
+}
+
 .custom-btn > p,
 .place-order-btn > p,
 .add-to-cart > p {

@@ -21,6 +21,11 @@ class App extends React.Component {
     this.placeOrder = this.placeOrder.bind(this);
     this.onAgreeClick = this.onAgreeClick.bind(this);
     this.formatPriceNumber = this.formatPriceNumber.bind(this);
+    this.updateCart = this.updateCart.bind(this);
+  }
+
+  updateCart() {
+    this.getCartItems();
   }
 
   onAgreeClick() {
@@ -148,7 +153,7 @@ class App extends React.Component {
             cartItemCount={this.state.cart.length}
             setView={this.setView}
           />
-          <CartSummary setView={this.setView} cartItems={this.state.cart} formatPrice={this.formatPriceNumber} />
+          <CartSummary setView={this.setView} cartItems={this.state.cart} formatPrice={this.formatPriceNumber} updateCart={this.updateCart} />
         </div>
       );
     } else if (this.state.view.name === 'checkout') {

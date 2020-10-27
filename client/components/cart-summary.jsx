@@ -1,5 +1,5 @@
 import React from 'react';
-import CardSummaryItem from './cart-summary-item';
+import CartSummaryItem from './cart-summary-item';
 
 class CartSummary extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class CartSummary extends React.Component {
           <div className="h1 text-center text-uppercase">Shopping Bag</div>
           <div>
             {this.props.cartItems.map(item => (
-              <CardSummaryItem item={item} key={item.cartItemId} formatPrice={this.props.formatPrice} />
+              <CartSummaryItem item={item} key={item.cartItemId} formatPrice={this.props.formatPrice} updateCart={this.props.updateCart}/>
             ))}
           </div>
           {this.props.cartItems.length !== 0 ? (
