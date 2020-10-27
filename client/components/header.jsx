@@ -70,7 +70,7 @@ class Header extends React.Component {
     return (
       <>
         <div className="row justify-content-center mt-3">
-          <h1 className="text-uppercase">chanel</h1>
+          <h1 className="text-uppercase logo" onClick={this.onAllClick}>chanel</h1>
         </div>
         <nav
           className="row navbar navbar-expand-lg navbar-light border-bottom width-95 m-auto"

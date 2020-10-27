@@ -46,7 +46,7 @@ class ProductDetails extends React.Component {
                   <p className="card-text my-3 price">${this.props.formatPrice(this.state.product.price / 100)}</p>
                   <button
                     type="button"
-                    className="btn btn-dark add-to-cart d-flex justify-content-center p-2 bold-border"
+                    className="btn btn-dark add-to-cart d-flex justify-content-center p-2"
                     onClick={this.handleAddBtn}
                   >
                     <p className="text-uppercase m-0">Add to Cart</p>
