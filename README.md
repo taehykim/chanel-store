@@ -31,4 +31,4 @@ Try the application at [https://coffeefarm.taehykim.com/]
 ## Preview
 
 
-![CHANEL APP DEMO](assets/coffee-farm-demo-v1.gif)
+![CHANEL APP DEMO](assets/chanel-store-demo.gif)
