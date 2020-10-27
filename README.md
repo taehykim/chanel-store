@@ -1,6 +1,6 @@
 # chanel-store
 A full stack Node.js and React shopping cart app.
-The theme was inspired by the official Chanel Website.
+The theme was inspired by the official Chanel website.
 
 ## Technologies Used
 
