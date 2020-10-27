@@ -5,6 +5,7 @@ import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
 import DisclaimerModal from './disclaimer-modal';
+import ProductDisplay from './product-display';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,6 +23,7 @@ class App extends React.Component {
     this.onAgreeClick = this.onAgreeClick.bind(this);
     this.formatPriceNumber = this.formatPriceNumber.bind(this);
     this.updateCart = this.updateCart.bind(this);
+    this.getAllProducts = this.getAllProducts.bind(this);
   }
 
   updateCart() {
@@ -71,6 +73,15 @@ class App extends React.Component {
     });
   }
 
+  getAllProducts() {
+    fetch('/api/products')
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ products: data });
+      })
+      .catch(err => console.error('Error:', err));
+  }
+
   formatPriceNumber(price) {
     const priceStr = price.toString().split('');
     const len = priceStr.length;
@@ -85,6 +96,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getCartItems();
+    this.getAllProducts();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -118,6 +130,7 @@ class App extends React.Component {
             cartItemCount={this.state.cart.length}
             setView={this.setView}
           />
+          <ProductDisplay products={this.state.products} />
           <ProductList
             setView={this.setView}
             store={this.state.view.params}

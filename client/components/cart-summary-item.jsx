@@ -29,9 +29,9 @@ class CardSummaryItem extends React.Component {
               <span className="card-title text-uppercase product-detail-title my-3 border-0">{this.props.groupedItem.item.name}</span>
               <p className="card-text my-3">{this.props.groupedItem.item.shortDescription}</p>
               <p className="card-text my-3 price">${this.props.formatPrice(this.props.groupedItem.item.price / 100)}</p>
-              <p className="card-text my-3">Quantity {this.props.groupedItem.count}</p>
-              <div className="text-uppercase d-flex">
-                <p className="m-0 remove-btn" onClick={this.onRemoveClick}>Remove</p>
+              <div className="d-flex justify-content-between">
+                <p className="card-text my-3">Quantity {this.props.groupedItem.count}</p>
+                <p className="card-text my-3 remove-btn" onClick={this.onRemoveClick}>Remove</p>
               </div>
             </div>
           </div>

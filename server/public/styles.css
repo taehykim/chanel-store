@@ -102,6 +102,11 @@ div.product-list-div img.product-img:hover {
   width: 95%;
 }
 
+.carousel-custom {
+  width: 500px;
+  height: 500px !important;
+}
+
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   .checkout-card {
     flex-direction: column !important;
