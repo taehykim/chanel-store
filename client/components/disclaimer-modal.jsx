@@ -30,6 +30,9 @@ class DisclaimerModal extends React.Component {
               </p>
               <ul>
                 <li>
+                  This website is a simple <a href="https://www.chanel.com/us/" target="_blank" rel="noopener noreferrer" style={{ color: 'black' }}>Chanel</a> store clone for demonstration purposes.
+                </li>
+                <li>
                   I understand that the content provided in this website is for
                   <b> demonstration </b>
                   purposes only, and thus no real purchases can be made.
