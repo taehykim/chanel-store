@@ -52,7 +52,7 @@ class CheckoutForm extends React.Component {
         style={{ minHeight: '100vh' }}
       >
         <div
-          className="d-flex flex-column p-5 mx-auto"
+          className="d-flex flex-column p-5 mx-auto mobile-padding-1"
           style={{ width: '90%' }}
         >
           <div className="h1 text-uppercase text-center">Checkout</div>
@@ -106,10 +106,10 @@ class CheckoutForm extends React.Component {
                   ></textarea>
                 </div>
                 <div className="d-flex flex-column justify-content-center align-items-center">
-                  <button type="submit" className="btn btn-dark text-uppercase p-3 checkout-div place-order-btn d-flex justify-content-center">
+                  <button type="submit" className="btn btn-dark text-uppercase p-3 checkout-div place-order-btn d-flex justify-content-center mobile-btn">
                     <p className="m-0">Place Order</p>
                   </button>
-                  <div className="back my-3 checkout-div text-center p-3 bold-border text-uppercase custom-btn d-flex justify-content-center" onClick={this.onBackClick}>
+                  <div className="back my-3 checkout-div text-center p-3 bold-border text-uppercase custom-btn d-flex justify-content-center mobile-btn" onClick={this.onBackClick}>
                     <p className="m-0">Continue Shopping</p>
                   </div>
                 </div>

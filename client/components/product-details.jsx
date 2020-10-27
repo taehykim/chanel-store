@@ -29,7 +29,7 @@ class ProductDetails extends React.Component {
     return this.state.product ? (
       <>
         <div
-          className="row d-flex justify-content-center align-items-start py-5 body-custom"
+          className="row d-flex justify-content-center align-items-start py-5 body-custom mobile-details"
           style={{ minHeight: '100vh' }}
         >
           <div className="card mb-3 border-0">

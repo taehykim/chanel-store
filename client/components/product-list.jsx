@@ -42,9 +42,9 @@ class ProductList extends React.Component {
   }
 
   render() {
-    let categoryTitleRowClass = 'row flex-column pt-3 pb-1 width-95 m-auto';
+    let categoryTitleRowClass = 'row flex-column pt-3 pb-1 width-95 m-auto mobile-justify-align';
     let categoryTitleClass = 'h1 text-uppercase text-center';
-    let resultsStatsClass = 'h5 text-right mr-5';
+    let resultsStatsClass = 'h5 text-right mr-5 mobile-results';
     let categoryTitle;
     if (!this.props.categoryInfo) {
       categoryTitleClass += ' d-none';

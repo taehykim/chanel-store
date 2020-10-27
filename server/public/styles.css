@@ -107,6 +107,21 @@ div.product-list-div img.product-img:hover {
   height: 500px !important;
 }
 
+@media only screen and (max-width: 1250px) {
+  .two-col {
+    flex-basis: 35% !important;
+  }
+
+  nav > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+}
+
+
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   .checkout-card {
     flex-direction: column !important;
@@ -126,5 +141,42 @@ div.product-list-div img.product-img:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .mobile-justify-align{
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mobile-results{
+    margin: 0 !important;
+  }
+
+  .mobile-details {
+    padding: 1.5rem !important;
+  }
+
+  nav {
+    padding-bottom: 1rem !important;
+  }
+
+  .mobile-col{
+    flex-direction: column;
+  }
+
+  .mobile-btn {
+    padding: 0.5rem 1rem 0.5rem 1rem !important;
+  }
+
+  .mobile-padding-1 {
+    padding: 0.25rem !important;
+  }
+
+  nav > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
   }
 }

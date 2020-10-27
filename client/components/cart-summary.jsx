@@ -74,19 +74,19 @@ class CartSummary extends React.Component {
             ) : <></>}
           </div>
           {this.props.cartItems.length !== 0 ? (
-            <div className="d-flex justify-content-between align-items-center checkout-total p-5">
+            <div className="d-flex justify-content-between align-items-center checkout-total p-5 mobile-col">
               <div className="h3 text-uppercase">Total: ${this.props.formatPrice(this.getTotalPrice() / 100)}</div>
               <div className="d-flex flex-column">
                 <button
                   type="button"
-                  className="btn btn-dark text-uppercase py-3 px-5 summary-btn-black"
+                  className="btn btn-dark text-uppercase py-3 px-5 summary-btn-black mobile-btn"
                   onClick={this.onCheckoutClick}
                 >
                   <p className="m-0">Continue to Checkout</p>
                 </button>
                 <button
                   type="button"
-                  className="btn text-uppercase py-3 px-5 my-2 bold-border summary-btn-white"
+                  className="btn text-uppercase py-3 px-5 my-2 bold-border summary-btn-white mobile-btn"
                   onClick={this.onBackToCatalogClick}
                 >
                   <p className="m-0">Continue Shopping</p>

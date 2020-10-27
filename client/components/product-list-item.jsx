@@ -13,7 +13,7 @@ class ProductListItem extends React.Component {
 
   render() {
     return (
-      <div className="card-group m-auto" style={{ flexBasis: '30%' }} onClick={this.handleCardClick}>
+      <div className="card-group m-auto two-col" style={{ flexBasis: '30%' }} onClick={this.handleCardClick}>
         <div className="card border-0">
           <img src={this.props.product.image} className="card-img-top product-img" />
           <div className="card-body text-center">
