@@ -17,7 +17,7 @@ The theme was inspired by the official Chanel website.
 - CSS3
 
 ## Live Demo
-Live Demo Coming Soon
+[https://coffeefarm.taehykim.com](https://coffeefarm.taehykim.com)
 
 ## Features
 
