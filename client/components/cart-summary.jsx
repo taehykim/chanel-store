@@ -1,12 +1,14 @@
 import React from 'react';
-import CardSummaryItem from './cart-summary-item';
+import CartSummaryItem from './cart-summary-item';
 
 class CartSummary extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { grouped: {} };
     this.onBackToCatalogClick = this.onBackToCatalogClick.bind(this);
     this.getTotalPrice = this.getTotalPrice.bind(this);
     this.onCheckoutClick = this.onCheckoutClick.bind(this);
+    this.groupProducts = this.groupProducts.bind(this);
   }
 
   onBackToCatalogClick() {
@@ -22,7 +24,38 @@ class CartSummary extends React.Component {
     for (let i = 0; i < this.props.cartItems.length; i++) {
       total += this.props.cartItems[i].price;
     }
-    return total / 100;
+    return total;
+  }
+
+  groupProducts() {
+    const productIds = [];
+    const groupedCartItems = {};
+    for (let i = 0; i < this.props.cartItems.length; i++) {
+      productIds.push(this.props.cartItems[i].productId);
+    }
+
+    const uniqueProductIds = [...new Set(productIds)];
+
+    for (let k = 0; k < uniqueProductIds.length; k++) {
+      groupedCartItems[uniqueProductIds[k]] = { count: 0, item: null };
+    }
+
+    for (let m = 0; m < this.props.cartItems.length; m++) {
+      groupedCartItems[this.props.cartItems[m].productId].count++;
+      groupedCartItems[this.props.cartItems[m].productId].item = this.props.cartItems[m];
+    }
+
+    this.setState({ grouped: groupedCartItems });
+  }
+
+  componentDidMount() {
+    this.groupProducts();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.cartItems.length !== prevProps.cartItems.length) {
+      this.groupProducts();
+    }
   }
 
   render() {
@@ -32,36 +65,50 @@ class CartSummary extends React.Component {
           className="d-flex flex-column p-5 mx-auto cart-mobile"
           style={{ width: '90%' }}
         >
-          <div
-            className="back my-3 white-font"
-            onClick={this.onBackToCatalogClick}
-          >
-            &lt; Back to catalog
-          </div>
-          <div className="h1 white-font">My Cart</div>
+          <div className="h1 text-center text-uppercase">Shopping Bag</div>
           <div>
-            {this.props.cartItems.map(item => (
-              <CardSummaryItem item={item} key={item.cartItemId} />
-            ))}
+            {Object.keys(this.state.grouped).length !== 0 ? (
+              Object.keys(this.state.grouped).map(productId => (
+                <CartSummaryItem key={productId} formatPrice={this.props.formatPrice} updateCart={this.props.updateCart} groupedItem={this.state.grouped[productId]} />
+              ))
+            ) : <></>}
           </div>
-          <div className="d-flex justify-content-between align-items-center white-font">
-            <div className="h3">Item Total: ${this.getTotalPrice()}</div>
-            {this.props.cartItems.length !== 0 ? (
-              <div>
+          {this.props.cartItems.length !== 0 ? (
+            <div className="d-flex justify-content-between align-items-center checkout-total p-5 mobile-col">
+              <div className="h3 text-uppercase">Total: ${this.props.formatPrice(this.getTotalPrice() / 100)}</div>
+              <div className="d-flex flex-column">
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-dark text-uppercase py-3 px-5 summary-btn-black mobile-btn"
                   onClick={this.onCheckoutClick}
                 >
-                  Check Out
+                  <p className="m-0">Continue to Checkout</p>
+                </button>
+                <button
+                  type="button"
+                  className="btn text-uppercase py-3 px-5 my-2 bold-border summary-btn-white mobile-btn"
+                  onClick={this.onBackToCatalogClick}
+                >
+                  <p className="m-0">Continue Shopping</p>
                 </button>
               </div>
-            ) : (
-              <div></div>
-            )}
-          </div>
+            </div>
+          )
+            : <>
+              <div className="h5 text-center font-weight-light">Your bag is empty</div>
+              <div className="d-flex justify-content-center">
+                <div
+                  className="btn btn-dark text-uppercase py-3 px-5 m-4 summary-btn-white"
+                  onClick={this.onBackToCatalogClick}
+                >
+                  <p className="m-0">Continue Shopping</p>
+                </div>
+              </div>
+            </>
+          }
         </div>
       </div>
+
     );
   }
 }

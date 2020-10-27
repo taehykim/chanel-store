@@ -9,13 +9,13 @@ class ProductList extends React.Component {
   }
 
   componentDidMount() {
-    const storeId = this.props.storeId ? this.props.storeId : null;
-    this.getProducts(storeId);
+    const categoryId = this.props.categoryInfo ? this.props.categoryInfo.categoryId : null;
+    this.getProducts(categoryId);
   }
 
-  getProducts(storeId) {
-    if (storeId) {
-      fetch(`/api/store/products/${storeId}`)
+  getProducts(categoryId) {
+    if (categoryId) {
+      fetch(`/api/category/products/${categoryId}`)
         .then(res => res.json())
         .then(data => {
           this.setState({ products: data });
@@ -32,21 +32,41 @@ class ProductList extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.storeId !== prevProps.storeId) {
-      this.getProducts(this.props.storeId);
+    if (this.props.categoryInfo !== prevProps.categoryInfo) {
+      if (this.props.categoryInfo) {
+        this.getProducts(this.props.categoryInfo.categoryId);
+      } else {
+        this.getProducts(null);
+      }
     }
   }
 
   render() {
+    let categoryTitleRowClass = 'row flex-column pt-3 pb-1 width-95 m-auto mobile-justify-align';
+    let categoryTitleClass = 'h1 text-uppercase text-center';
+    let resultsStatsClass = 'h5 text-right mr-5 mobile-results';
+    let categoryTitle;
+    if (!this.props.categoryInfo) {
+      categoryTitleClass += ' d-none';
+      resultsStatsClass += ' d-none';
+    } else {
+      categoryTitle = this.props.categoryInfo.name;
+      categoryTitleRowClass += ' border-bottom';
+    }
     return (
       <>
-        <div className="row justify-content-center py-4 body-custom">
+        <div className={categoryTitleRowClass}>
+          <span className={categoryTitleClass}>{categoryTitle}</span>
+          <span className={resultsStatsClass}>{this.state.products.length} results</span>
+        </div>
+        <div className="row justify-content-center py-4 body-custom product-list-div">
           {this.state.products.map(product => (
             <ProductListItem
               key={product.productId}
               product={product}
               setView={this.props.setView}
               store={this.props.store}
+              formatPrice={this.props.formatPrice}
             />
           ))}
         </div>

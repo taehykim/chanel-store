@@ -5,6 +5,7 @@ import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
 import CheckoutForm from './checkout-form';
 import DisclaimerModal from './disclaimer-modal';
+import ProductDisplay from './product-display';
 
 class App extends React.Component {
   constructor(props) {
@@ -20,6 +21,13 @@ class App extends React.Component {
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
     this.onAgreeClick = this.onAgreeClick.bind(this);
+    this.formatPriceNumber = this.formatPriceNumber.bind(this);
+    this.updateCart = this.updateCart.bind(this);
+    this.getAllProducts = this.getAllProducts.bind(this);
+  }
+
+  updateCart() {
+    this.getCartItems();
   }
 
   onAgreeClick() {
@@ -65,8 +73,30 @@ class App extends React.Component {
     });
   }
 
+  getAllProducts() {
+    fetch('/api/products')
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ products: data });
+      })
+      .catch(err => console.error('Error:', err));
+  }
+
+  formatPriceNumber(price) {
+    const priceStr = price.toString().split('');
+    const len = priceStr.length;
+    const adder = len % 3;
+    if (len > 3) {
+      for (let i = adder; i < len; i += 3) {
+        priceStr.splice(i, 0, ',');
+      }
+    }
+    return priceStr.join('');
+  }
+
   componentDidMount() {
     this.getCartItems();
+    this.getAllProducts();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -79,7 +109,7 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.view.name === 'store') {
+    if (this.state.view.name === 'category') {
       return (
         <div className="container-fluid">
           <Header
@@ -88,7 +118,8 @@ class App extends React.Component {
           />
           <ProductList
             setView={this.setView}
-            storeId={this.state.view.params}
+            categoryInfo={this.state.view.params}
+            formatPrice={this.formatPriceNumber}
           />
         </div>
       );
@@ -99,10 +130,12 @@ class App extends React.Component {
             cartItemCount={this.state.cart.length}
             setView={this.setView}
           />
+          <ProductDisplay products={this.state.products} />
           <ProductList
             setView={this.setView}
             store={this.state.view.params}
             prevView={this.state.previousView}
+            formatPrice={this.formatPriceNumber}
           />
           <DisclaimerModal
             onAgreeClick={this.onAgreeClick}
@@ -122,6 +155,7 @@ class App extends React.Component {
             setView={this.setView}
             addToCart={this.addToCart}
             prevView={this.state.previousView}
+            formatPrice={this.formatPriceNumber}
           />
         </div>
       );
@@ -132,7 +166,7 @@ class App extends React.Component {
             cartItemCount={this.state.cart.length}
             setView={this.setView}
           />
-          <CartSummary setView={this.setView} cartItems={this.state.cart} />
+          <CartSummary setView={this.setView} cartItems={this.state.cart} formatPrice={this.formatPriceNumber} updateCart={this.updateCart} />
         </div>
       );
     } else if (this.state.view.name === 'checkout') {
@@ -146,6 +180,7 @@ class App extends React.Component {
             placeOrder={this.placeOrder}
             orderItems={this.state.cart}
             setView={this.setView}
+            formatPrice={this.formatPriceNumber}
           />
         </div>
       );

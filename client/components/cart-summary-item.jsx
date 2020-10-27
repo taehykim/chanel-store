@@ -1,25 +1,39 @@
 import React from 'react';
 
 class CardSummaryItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onRemoveClick = this.onRemoveClick.bind(this);
+  }
+
+  onRemoveClick() {
+    const cartItemId = this.props.groupedItem.item.cartItemId;
+
+    fetch(`/api/cart/${cartItemId}`, { method: 'DELETE', headers: { 'Content-Type': 'application/json' } })
+      .then()
+      .then(data => {
+        this.props.updateCart();
+      })
+      .catch(err => console.error(err));
+  }
+
   render() {
     return (
-      <div className="card my-3 mx-auto d-flex justify-content-center flex-row p-3 regular-card checkout-card">
-        <div
-          className="checkout-img"
-          style={{
-            height: '300px',
-            width: '40%',
-            backgroundImage: `url(${this.props.item.image})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center'
-          }}
-        ></div>
-        <div className="card-body d-flex justify-content-start align-items-center">
-          <div>
-            <h5 className="card-title">{this.props.item.name}</h5>
-            <p className="card-text">${this.props.item.price / 100}</p>
-            <p className="card-text">{this.props.item.shortDescription}</p>
+      <div className="card mb-3 border-0 cart-summary-card">
+        <div className="row no-gutters justify-content-around align-items-center">
+          <div className="col-md-3">
+            <img src={this.props.groupedItem.item.image} className="card-img" />
+          </div>
+          <div className="col-md-3">
+            <div className="card-body p-0 d-flex flex-column justify-content-center align-items-stretch">
+              <span className="card-title text-uppercase product-detail-title my-3 border-0">{this.props.groupedItem.item.name}</span>
+              <p className="card-text my-3">{this.props.groupedItem.item.shortDescription}</p>
+              <p className="card-text my-3 price">${this.props.formatPrice(this.props.groupedItem.item.price / 100)}</p>
+              <div className="d-flex justify-content-between">
+                <p className="card-text my-3">Quantity {this.props.groupedItem.count}</p>
+                <p className="card-text my-3 remove-btn" onClick={this.onRemoveClick}>Remove</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

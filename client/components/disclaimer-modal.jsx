@@ -30,10 +30,12 @@ class DisclaimerModal extends React.Component {
               </p>
               <ul>
                 <li>
+                  This website is a simple <a href="https://www.chanel.com/us/" target="_blank" rel="noopener noreferrer" style={{ color: 'black' }}>Chanel</a> store clone for demonstration purposes.
+                </li>
+                <li>
                   I understand that the content provided in this website is for
                   <b> demonstration </b>
-                  purposes only, and thus no real purchases can be made from
-                  this website.
+                  purposes only, and thus no real purchases can be made.
                 </li>
                 <li>
                   I understand that I must <b>not</b> provide my real payment
@@ -44,7 +46,7 @@ class DisclaimerModal extends React.Component {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-dark"
                 onClick={this.props.onAgreeClick}
               >
                 Agree and Continue

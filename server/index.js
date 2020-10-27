@@ -19,11 +19,11 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/stores', (req, res, next) => {
+app.get('/api/categories', (req, res, next) => {
   const query = `
   select
     *
-  from "stores"
+  from "categories"
   `;
 
   db.query(query)
@@ -31,10 +31,10 @@ app.get('/api/stores', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/store/products/:storeId', (req, res, next) => {
+app.get('/api/category/products/:categoryId', (req, res, next) => {
   const query = `
     select
-    "s"."name" as "storeName",
+    "c"."name" as "categoryName",
     "p"."productId",
     "p"."name" as "productName",
     "p"."price",
@@ -42,18 +42,18 @@ app.get('/api/store/products/:storeId', (req, res, next) => {
     "p"."shortDescription",
     "p"."longDescription"
     from "products" as "p"
-    join "stores" as "s" using ("storeId")
-    where "s"."storeId" = $1;
+    join "categories" as "c" using ("categoryId")
+    where "c"."categoryId" = $1;
   `;
 
-  const storeId = Number(req.params.storeId);
+  const storeId = Number(req.params.categoryId);
 
   if (!Number.isInteger(storeId) || storeId <= 0) {
     res.status(400).json({ error: 'storeId must be a positive integer' });
     return;
   }
 
-  const params = [Number(req.params.storeId)];
+  const params = [Number(req.params.categoryId)];
 
   db.query(query, params)
     .then(result => {
@@ -139,6 +139,27 @@ app.get('/api/cart', (req, res, next) => {
     db.query(query, cartIdValue)
       .then(result => res.status(200).json(result.rows))
       .catch(err => next(err));
+  }
+});
+
+app.delete('/api/cart/:cartItemId', (req, res, next) => {
+  const cartItemId = Number(req.params.cartItemId);
+  if (!req.session.cartId) {
+    next(new ClientError('There must be a cartId in session', 400));
+  } else if (!cartItemId || cartItemId < 1) {
+    next(new ClientError('The cartItemId must be a positive integer', 400));
+  } else {
+    const deleteCartItem = `
+    delete from "cartItems"
+      where "cartItemId" = $1
+      and "cartId" = $2
+    returning *;
+    `;
+
+    db.query(deleteCartItem, [cartItemId, req.session.cartId])
+      .then(result => {
+        return result.rows[0] ? res.sendStatus(204) : next(new ClientError('The cartItemId does not exist in the cartItems table', 400));
+      }).catch(err => console.error(err));
   }
 });
 

@@ -4,6 +4,7 @@ class ProductListItem extends React.Component {
   constructor(props) {
     super(props);
     this.handleCardClick = this.handleCardClick.bind(this);
+
   }
 
   handleCardClick() {
@@ -12,40 +13,13 @@ class ProductListItem extends React.Component {
 
   render() {
     return (
-      <div
-        className="card justify-content-center align-items-center m-3 coffee-card"
-        style={{
-          width: '500px',
-          height: '330px',
-          borderRadius: '50px'
-        }}
-        onClick={this.handleCardClick}
-      >
-        <div
-          className="d-flex p-3"
-          style={{
-            width: '100%',
-            height: '100%'
-          }}
-        >
-          <div
-            style={{
-              height: '100%',
-              backgroundImage: `url(${this.props.product.image})`,
-              backgroundSize: 'contain',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              flexBasis: '100%'
-            }}
-          ></div>
-          <div className="card-body">
-            <h5 className="card-title h5">
-              <strong>{this.props.product.productName}</strong>
-            </h5>
-            <p className="card-text h5">
-              ${(this.props.product.price / 100).toFixed(2)}
-            </p>
-            <p className="card-text">{this.props.product.shortDescription}</p>
+      <div className="card-group m-auto two-col" style={{ flexBasis: '30%' }} onClick={this.handleCardClick}>
+        <div className="card border-0">
+          <img src={this.props.product.image} className="card-img-top product-img" />
+          <div className="card-body text-center">
+            <h5 className="card-title text-uppercase">{this.props.product.productName}</h5>
+            <p className="card-text">${this.props.formatPrice(this.props.product.price / 100)}</p>
+            <p className="card-text text-uppercase">{this.props.product.shortDescription}</p>
           </div>
         </div>
       </div>
