@@ -16,7 +16,7 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-ALTER TABLE IF EXISTS ONLY public.categories DROP CONSTRAINT IF EXISTS stores_pkey;
+ALTER TABLE IF EXISTS ONLY public.stores DROP CONSTRAINT IF EXISTS stores_pkey;
 ALTER TABLE IF EXISTS ONLY public.products DROP CONSTRAINT IF EXISTS products_pkey;
 ALTER TABLE IF EXISTS ONLY public.orders DROP CONSTRAINT IF EXISTS orders_pkey;
 ALTER TABLE IF EXISTS ONLY public.carts DROP CONSTRAINT IF EXISTS carts_pkey;
@@ -26,13 +26,12 @@ ALTER TABLE IF EXISTS public.products ALTER COLUMN "productId" DROP DEFAULT;
 ALTER TABLE IF EXISTS public.orders ALTER COLUMN "orderId" DROP DEFAULT;
 ALTER TABLE IF EXISTS public.carts ALTER COLUMN "cartId" DROP DEFAULT;
 ALTER TABLE IF EXISTS public."cartItems" ALTER COLUMN "cartItemId" DROP DEFAULT;
+DROP SEQUENCE IF EXISTS public."stores_storeId_seq";
+DROP TABLE IF EXISTS public.stores;
 DROP SEQUENCE IF EXISTS public."products_productId_seq";
 DROP TABLE IF EXISTS public.products;
 DROP SEQUENCE IF EXISTS public."orders_orderId_seq";
 DROP TABLE IF EXISTS public.orders;
-DROP TABLE IF EXISTS public.categories;
-DROP SEQUENCE IF EXISTS public."stores_storeId_seq";
-DROP TABLE IF EXISTS public.stores;
 DROP SEQUENCE IF EXISTS public."carts_cartId_seq";
 DROP TABLE IF EXISTS public.carts;
 DROP SEQUENCE IF EXISTS public."cartItems_cartItemId_seq";
@@ -134,46 +133,6 @@ ALTER SEQUENCE public."carts_cartId_seq" OWNED BY public.carts."cartId";
 
 
 --
--- Name: stores; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.stores (
-    "storeId" integer NOT NULL,
-    name text NOT NULL
-);
-
-
---
--- Name: stores_storeId_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public."stores_storeId_seq"
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: stores_storeId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public."stores_storeId_seq" OWNED BY public.stores."storeId";
-
-
---
--- Name: categories; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.categories (
-    "categoryId" integer DEFAULT nextval('public."stores_storeId_seq"'::regclass) NOT NULL,
-    name text NOT NULL
-);
-
-
---
 -- Name: orders; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -240,6 +199,36 @@ CREATE SEQUENCE public."products_productId_seq"
 --
 
 ALTER SEQUENCE public."products_productId_seq" OWNED BY public.products."productId";
+
+
+--
+-- Name: stores; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.stores (
+    "storeId" integer NOT NULL,
+    name text NOT NULL
+);
+
+
+--
+-- Name: stores_storeId_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public."stores_storeId_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: stores_storeId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public."stores_storeId_seq" OWNED BY public.stores."storeId";
 
 
 --
@@ -357,16 +346,6 @@ COPY public.carts ("cartId", "createdAt") FROM stdin;
 
 
 --
--- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.categories ("categoryId", name) FROM stdin;
-1	sunglasses
-2	sun protection
-\.
-
-
---
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -435,10 +414,6 @@ COPY public.products ("productId", name, price, image, "shortDescription", "long
 --
 
 COPY public.stores ("storeId", name) FROM stdin;
-1	illycaffè
-2	Philz Coffee
-3	Starbucks
-4	Nespresso
 1	illycaffè
 2	Philz Coffee
 3	Starbucks
@@ -514,11 +489,11 @@ ALTER TABLE ONLY public.products
 
 
 --
--- Name: categories stores_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: stores stores_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.categories
-    ADD CONSTRAINT stores_pkey PRIMARY KEY ("categoryId");
+ALTER TABLE ONLY public.stores
+    ADD CONSTRAINT stores_pkey PRIMARY KEY ("storeId");
 
 
 --
