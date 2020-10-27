@@ -16,7 +16,7 @@ A full stack Node.js and React shopping cart app.
 - CSS3
 
 ## Live Demo
-Try the application at [https://coffeefarm.taehykim.com/]
+Live Demo Coming Soon
 
 ## Features
 
